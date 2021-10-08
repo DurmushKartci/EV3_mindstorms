@@ -13,7 +13,7 @@ from pybricks.media.ev3dev import SoundFile, ImageFile
 
 # This object is the class of our robot 
     # this objects controls robots movement and measure
-class Robot(EV3Brick,right_motor_port,left_motor_port,ultrasonic_sensor_port,touch_sensor_port,color_sensor_port,gyro_sensor_port)
+class Robot(EV3Brick,wheelDiameter,axleTrack,right_motor_port,left_motor_port,ultrasonic_sensor_port,touch_sensor_port,color_sensor_port,gyro_sensor_port)
 
     # INIT
     def __init__(self):
@@ -25,7 +25,7 @@ class Robot(EV3Brick,right_motor_port,left_motor_port,ultrasonic_sensor_port,tou
         #MOTORS
         self.right_motor    = Motor(right_motor_port)
         self.left_motor     = Motor(left_motor_port)
-        self.motors         = DriveBase(left_motor, right_motor, wheel_diameter=55.5, axle_track=104)
+        self.motors         = DriveBase(left_motor, right_motor, wheel_diameter=wheelDiameter, axle_track=axleTrack)
 
         #SENSORS
         self.distance_sensor = UltrasonicSensor(ultrasonic_sensor_port)
@@ -100,7 +100,7 @@ touch_sensor_port       = Port.S2
 color_sensor_port       = Port.S3
 gyro_sensor_port        = Port.S4
 
-robot = Robot(ev3,  right_motor_port, left_motor_port, ultrasonic_sensor_port,  touch_sensor_port,    color_sensor_port,  gyro_sensor_port)
+robot = Robot(ev3, 55.5, 104, right_motor_port, left_motor_port, ultrasonic_sensor_port,  touch_sensor_port,    color_sensor_port,  gyro_sensor_port)
 
 
 ################    MAIN    ################    
