@@ -19,23 +19,23 @@ class Robot(EV3Brick,wheelDiameter,axleTrack,right_motor_port,left_motor_port,ul
     def __init__(self):
         
         #OBJECTS
-        self.ev3            = EV3Brick
-        self.speaker        = ev3.speaker
+        self.ev3                = EV3Brick
+        self.speaker            = ev3.speaker
 
         #MOTORS
-        self.right_motor    = Motor(right_motor_port)
-        self.left_motor     = Motor(left_motor_port)
-        self.motors         = DriveBase(left_motor, right_motor, wheel_diameter=wheelDiameter, axle_track=axleTrack)
+        self.right_motor        = Motor(right_motor_port)
+        self.left_motor         = Motor(left_motor_port)
+        self.motors             = DriveBase(left_motor, right_motor, wheel_diameter=wheelDiameter, axle_track=axleTrack)
 
         #SENSORS
-        self.distance_sensor = UltrasonicSensor(ultrasonic_sensor_port)
-        self.touch_sensor = TouchSensor(touch_sensor_port)
-        self.color_sensor = ColorSensor(color_sensor_port)
-        self.gyro_sensor = GyroSensor(gyro_sensor_port)
+        self.distance_sensor    = UltrasonicSensor(ultrasonic_sensor_port)
+        self.touch_sensor       = TouchSensor(touch_sensor_port)
+        self.color_sensor       = ColorSensor(color_sensor_port)
+        self.gyro_sensor        = GyroSensor(gyro_sensor_port)
 
     
     # This method beeps the speaker
-    def speaker_beep(self):
+    def beep(self):
         self.speaker.beep()
 
     # This  method takes the robot forward by the given distance (mm)
@@ -105,8 +105,7 @@ robot = Robot(ev3, 55.5, 104, right_motor_port, left_motor_port, ultrasonic_sens
 
 ################    MAIN    ################    
 
-ev3.speaker.beep()
-
+robot.beep()
 
 
 
