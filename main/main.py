@@ -1,4 +1,4 @@
-#!/usr/bin/env pybricks-micropython
+################    IMPORTS    ################    
 from pybricks.hubs import EV3Brick
 from pybricks.ev3devices import (Motor, TouchSensor, ColorSensor,
                                  InfraredSensor, UltrasonicSensor, GyroSensor)
@@ -8,9 +8,8 @@ from pybricks.robotics import DriveBase
 from pybricks.media.ev3dev import SoundFile, ImageFile
 
 
-# This program requires LEGO EV3 MicroPython v2.0 or higher.
-# Click "Open user guide" on the EV3 extension tab for more information.
 
+################    CLASSES    ################    
 
 # This object is the class of our robot 
     # this objects controls robots movement and measure
@@ -90,11 +89,8 @@ class Robot(EV3Brick,right_motor_port,left_motor_port,ultrasonic_sensor_port,tou
 
 
     
-    
+################    OBJECTS    ################    
 
-
-
-# Create your objects here.
 ev3 = EV3Brick()
 
 right_motor_port        = Port.A
@@ -108,6 +104,7 @@ robot = Robot(ev3,  right_motor_port, left_motor_port, ultrasonic_sensor_port,  
 
 
 ################    MAIN    ################    
+
 ev3.speaker.beep()
 
 
