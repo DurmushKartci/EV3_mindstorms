@@ -13,7 +13,7 @@ from pybricks.media.ev3dev import SoundFile, ImageFile
 
 # This object is the class of our robot 
     # this objects controls robots movement and measure
-class Robot(EV3Brick,wheelDiameter,axleTrack,right_motor_port,left_motor_port,ultrasonic_sensor_port,touch_sensor_port,color_sensor_port,gyro_sensor_port)
+class Robot(EV3Brick,wheelDiameter,axleTrack,right_motor_port,left_motor_port,ultrasonic_sensor_port,touch_sensor_port,color_sensor_port,gyro_sensor_port):
 
     # INIT
     def __init__(self):
