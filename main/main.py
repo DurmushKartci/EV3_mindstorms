@@ -1,6 +1,6 @@
-################    IMPORTS    ################    
+# ###############    IMPORTS    ################    
 from pybricks.hubs import EV3Brick
-from pybricks.ev3devices import (Motor, TouchSensor, ColorSensor,InfraredSensor, UltrasonicSensor, GyroSensor)
+from pybricks.ev3devices import (Motor, TouchSensor, ColorSensor, InfraredSensor, UltrasonicSensor, GyroSensor)
 from pybricks.parameters import Port, Stop, Direction, Button, Color
 from pybricks.tools import wait, StopWatch, DataLog
 from pybricks.robotics import DriveBase
@@ -8,7 +8,7 @@ from pybricks.media.ev3dev import SoundFile, ImageFile
 
 
 
-################    CLASSES    ################    
+# ###############    CLASSES    ################    
 
 # This object is the class of our robot 
     # this objects controls robots movement and measure
@@ -24,7 +24,7 @@ class Robot():
         ################    Motors    ################    
         self.right_motor        = Motor(right_motor_port)
         self.left_motor         = Motor(left_motor_port)
-        self.motors             = DriveBase(self.left_motor, self.right_motor, wheel_diameter=wheelDiameter, axle_track=axleTrack)
+        self.motors             = DriveBase(self.left_motor, self.right_motor, wheel_diameter = wheelDiameter, axle_track = axleTrack)
 
         ################    Sensors    ################    
         self.distance_sensor    = None
@@ -69,23 +69,23 @@ class Robot():
         self.speaker.beep()
 
     # This  method takes the robot forward by the given distance (mm)
-    def forward(self,distance):
+    def forward(self, distance):
         if self.gyro_sensor is not None:
             self.correction = (0 - self.angle())
-            self.motors.drive(distance,self.correction)
+            self.motors.drive(distance, self.correction)
         else:
             self.motors.straight(distance)
 
     # This  method takes the robot backward by the given distance (mm)
-    def backward(self,distance):
+    def backward(self, distance):
         if self.gyro_sensor is not None:
             self.correction = (0 - self.angle())
-            self.motors.drive(-distance,self.correction)
+            self.motors.drive(-distance, self.correction)
         else:
             self.motors.straight(-distance)
 
     # This method rotates the robot to the left by the given angle
-    def turn_left(self,angle):
+    def turn_left(self, angle):
         if self.gyro_sensor is not None:
             self.stop()
             self.motors.turn(angle)
@@ -96,7 +96,7 @@ class Robot():
 
 
     # This method rotates the robot to the right by the given angle
-    def turn_right(self,angle):
+    def turn_right(self, angle):
         if self.gyro_sensor is not None:
             self.stop()
             self.motors.turn(-angle)
@@ -106,7 +106,7 @@ class Robot():
             self.motors.turn(-angle)
 
     # This method rotates the robot to the right by the given angle
-    def stop(self,angle):
+    def stop(self, angle):
         if self.gyro_sensor is not None:
             self.correction = (0 - self.angle())
             self.motors.stop()
@@ -161,12 +161,12 @@ class Robot():
             return None
 
     # This method sets the rotation angle of the sensor to a desired value. We do it because if we dont we can't measure the speed of the
-    def reset_angle(self,angle):
+    def reset_angle(self, angle):
         if self.gyro_sensor is not None:
             self.gyro_sensor.reset_angle(angle)        
 
     
-################    OBJECTS    ################    
+# ###############    OBJECTS    ################    
 
 ev3 = EV3Brick()
 
@@ -180,7 +180,7 @@ gyro_sensor_port        = Port.S4
 robot = Robot(ev3, 55.5, 104, right_motor_port, left_motor_port, ultrasonic_sensor_port,  touch_sensor_port,    color_sensor_port,  gyro_sensor_port)
 
 
-################    MAIN    ################    
+# ###############    MAIN    ################    
 
 # Obstacle avoiding robot
 while true:
