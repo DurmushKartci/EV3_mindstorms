@@ -43,19 +43,25 @@ class Robot():
         #Defining sensor if they have a port
         if ultrasonic_sensor_port is not None:
             self.distance_sensor    = UltrasonicSensor(ultrasonic_sensor_port)
+            self.beep()
 
         if touch_sensor_port is not None:
             self.touch_sensor       = TouchSensor(touch_sensor_port)
+            self.beep()
+            
 
         if color_sensor_port is not None:
             self.color_sensor       = ColorSensor(color_sensor_port)
+            self.beep()
 
         if gyro_sensor_port is not None:
             self.gyro_sensor        = GyroSensor(gyro_sensor_port)
+            self.beep()
 
-
-        self.reset_angle(0)
-        self.correction = (0 - self.angle())
+        # if there is a gyro sensor reset the angle and give variable to correction
+        if self.gyro_sensor is not None:
+            self.reset_angle(0)
+            self.correction = (0 - self.angle())
 
 
     
