@@ -33,6 +33,15 @@ class Robot():
         self.color_sensor       = ColorSensor(color_sensor_port)
         self.gyro_sensor        = GyroSensor(gyro_sensor_port)
 
+        #VARIABLES
+        self.correction = 0
+
+        #SET UP 
+        self.reset_angle(0)
+
+        self.correction = (0 - self.angle())
+
+
     
     # This method beeps the speaker
     def beep(self):
@@ -40,19 +49,32 @@ class Robot():
 
     # This  method takes the robot forward by the given distance (mm)
     def forward(self,distance):
-        self.motors.straight(distance)
+        self.correction = (0 - self.angle())
+        self.motors.drive(distance,self.correction)
 
     # This  method takes the robot backward by the given distance (mm)
     def backward(self,distance):
-        self.motors.straight(-distance)
+        self.correction = (0 - self.angle())
+        self.motors.drive(-distance,self.correction)
 
     # This method rotates the robot to the left by the given angle
     def turn_left(self,angle):
+        self.stop()
         self.motors.turn(angle)
+        self.reset_angle(0)
+        self.correction = (0 - self.angle())
 
     # This method rotates the robot to the right by the given angle
     def turn_right(self,angle):
+        self.stop()
         self.motors.turn(-angle)
+        self.reset_angle(0)
+        self.correction = (0 - self.angle())
+
+    # This method rotates the robot to the right by the given angle
+    def stop(self,angle):
+        self.correction = (0 - self.angle())
+        self.motors.stop()
 
     # This method measure the distance and returns it
     def distance(self):
@@ -83,8 +105,8 @@ class Robot():
         return self.gyro_sensor.angle()
 
     # This method sets the rotation angle of the sensor to a desired value. We do it because if we dont we can't measure the speed of the
-    def reset_angle():
-        self.gyro_sensor.reset_angle()
+    def reset_angle(self,angle):
+        self.gyro_sensor.reset_angle(angle)
         
 
 
