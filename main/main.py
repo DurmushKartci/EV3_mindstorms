@@ -16,7 +16,7 @@ from pybricks.media.ev3dev import SoundFile, ImageFile
 class Robot():
 
     # INIT
-    def __init__(self,EV3Brick,wheelDiameter,axleTrack,right_motor_port,left_motor_port,ultrasonic_sensor_port,touch_sensor_port,color_sensor_port,gyro_sensor_port):
+    def __init__(self,  EV3Brick, wheelDiameter,   axleTrack, right_motor_port,    left_motor_port,    ultrasonic_sensor_port, touch_sensor_port,   color_sensor_port, gyro_sensor_port):
         
         #OBJECTS
         self.ev3                = EV3Brick
@@ -127,7 +127,12 @@ robot = Robot(ev3, 55.5, 104, right_motor_port, left_motor_port, ultrasonic_sens
 
 ################    MAIN    ################    
 
-robot.beep()
+while true:
+    while robot.distance() >= 10:
+        robot.forward(100)
+    robot.beep()
+    robot.turn_right(90)
+
 
 
 
