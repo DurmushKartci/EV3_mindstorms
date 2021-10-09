@@ -183,7 +183,7 @@ robot = Robot(ev3, 55.5, 104, right_motor_port, left_motor_port, ultrasonic_sens
 # ###############    MAIN    ################    
 
 # Obstacle avoiding robot
-while true:
+while True:
     while robot.distance() >= 10:
         robot.forward(100)
     robot.beep()
