@@ -121,7 +121,7 @@ class Robot():
     # This method return if touch sensor is pressed
     def is_pressed(self):
         if self.touch_sensor is not None:
-            return self.touch_sensor.is_pressed
+            return self.touch_sensor.pressed()
         else:
             return None
     
