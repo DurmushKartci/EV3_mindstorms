@@ -92,6 +92,7 @@ class Robot():
             self.reset_angle(0)
             self.correction = (0 - self.angle())
         else:
+            self.stop()
             self.motors.turn(angle)
 
 
@@ -109,7 +110,12 @@ class Robot():
     def stop(self, angle):
         if self.gyro_sensor is not None:
             self.correction = (0 - self.angle())
+            self.left_motor.brake()
+            self.right_motor.brake()
             self.motors.stop()
+        else:
+            self.left_motor.brake()
+            self.right_motor.brake()
 
     # This method measure the distance and returns it
     def distance(self):
