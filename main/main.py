@@ -15,7 +15,7 @@ from pybricks.media.ev3dev import SoundFile, ImageFile
 class Robot():
 
     # INIT
-    def __init__(self,  EV3Brick, wheelDiameter,   axleTrack, right_motor_port,    left_motor_port,    ultrasonic_sensor_port, touch_sensor_port,   color_sensor_port, gyro_sensor_port):
+    def __init__ ( self ,  EV3Brick, wheelDiameter,   axleTrack, right_motor_port,    left_motor_port,    ultrasonic_sensor_port, touch_sensor_port,   color_sensor_port,  gyro_sensor_port):
         
         ################    Objects    ################    
         self.ev3                = EV3Brick
@@ -40,9 +40,11 @@ class Robot():
         ################    Set Up    ################    
 
         #Defining sensor if they have a port
+    
         if ultrasonic_sensor_port is not None:
             self.distance_sensor    = UltrasonicSensor(ultrasonic_sensor_port)
             self.beep()
+
 
         if touch_sensor_port is not None:
             self.touch_sensor       = TouchSensor(touch_sensor_port)
@@ -60,7 +62,7 @@ class Robot():
         # if there is a gyro sensor reset the angle and give variable to correction
         if self.gyro_sensor is not None:
             self.reset_angle(0)
-            self.correction = (0 - self.angle())
+            self.correction = 0 - self.angle()
 
 
     
@@ -163,7 +165,7 @@ class Robot():
     def angle(self):
         if self.gyro_sensor is not None:
             return self.gyro_sensor.angle()
-        else:
+        elif self.gyro_sensor is None:
             return None
 
     # This method sets the rotation angle of the sensor to a desired value. We do it because if we dont we can't measure the speed of the
@@ -178,10 +180,10 @@ ev3 = EV3Brick()
 
 right_motor_port        = Port.A
 left_motor_port         = Port.D
-ultrasonic_sensor_port  = Port.S1
+ultrasonic_sensor_port  = None
 touch_sensor_port       = None
 color_sensor_port       = None
-gyro_sensor_port        = Port.S4
+gyro_sensor_port        = None
 
 robot = Robot(ev3, 55.5, 104, right_motor_port, left_motor_port, ultrasonic_sensor_port,  touch_sensor_port,    color_sensor_port,  gyro_sensor_port)
 
@@ -190,10 +192,7 @@ robot = Robot(ev3, 55.5, 104, right_motor_port, left_motor_port, ultrasonic_sens
 
 # Obstacle avoiding robot
 while True:
-    while robot.distance() >= 10:
-        robot.forward(100)
-    robot.beep()
-    robot.turn_right(90)
+    robot.forward(100)
 
 
 
