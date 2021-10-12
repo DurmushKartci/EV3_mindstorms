@@ -164,8 +164,10 @@ class Robot():
     # This method return rotation angle of gyro sensor
     def angle(self):
         if self.gyro_sensor is not None:
+            print("WHY")
             return self.gyro_sensor.angle()
         elif self.gyro_sensor is None:
+            print("hello")
             return None
 
     # This method sets the rotation angle of the sensor to a desired value. We do it because if we dont we can't measure the speed of the
@@ -183,7 +185,7 @@ left_motor_port         = Port.D
 ultrasonic_sensor_port  = None
 touch_sensor_port       = None
 color_sensor_port       = None
-gyro_sensor_port        = None
+gyro_sensor_port        = Port.S2
 
 robot = Robot(ev3, 55.5, 104, right_motor_port, left_motor_port, ultrasonic_sensor_port,  touch_sensor_port,    color_sensor_port,  gyro_sensor_port)
 
