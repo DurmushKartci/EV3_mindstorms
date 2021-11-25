@@ -19,11 +19,10 @@ ev3 = EV3Brick()
 left_motor = Motor(Port.D)
 right_motor = Motor(Port.C)
 
-robot = DriveBase(left_motor, right_motor, wheel_diameter=55.5, axle_track=104)
+robot = DriveBase(left_motor, right_motor, wheel_diameter=55.5, axle_track=150)
 
-robot.straight(10)
+robot.straight(100)
 
 robot.turn(90)
 
 # Write your program here.
-test_motor.run_target(500, 90)
