@@ -215,7 +215,23 @@ class Robot():
     # This method sets the rotation angle of the sensor to a desired value. We do it because if we dont we can't measure the speed of the
     def reset_angle(self, angle):
         if self.gyro_sensor is not None:
-            self.gyro_sensor.reset_angle(angle)        
+            self.gyro_sensor.reset_angle(angle)    
+
+    # This method turns the robot into an obstacle avoiding robot.s
+    def avoid_obstacle(self, distance, speed):
+        if self.distance_sensor is not None:
+            if self.distance() <= 15:
+                self.speaker.set_volume(50, which='_all_')
+                self.speaker.beep(frequency=200,duration=100)
+                self.speaker.set_volume(100, which='_all_')
+                self.forward(distance,speed)
+            else:
+                self.speaker.beep(frequency=440,duration=200)
+                while self.distance() < 20:
+                    self.turn_right(5)
+        else:
+            return None
+
 
     
 # ###############    OBJECTS    ################    
@@ -233,28 +249,6 @@ robot = Robot(ev3, 55.5, 165, right_motor_port, left_motor_port, ultrasonic_sens
 
 
 # ###############    MAIN    ################    
-
-# Obstacle avoiding robot
-
-robot.forward(1000000,200)
-# robot.turn_right(90)
-# print(robot.angle())
-# robot.forward(200,500)
-# robot.turn_right(90)
-# robot.forward(200,500)
-# robot.turn_right(90)
-# robot.forward(200,500)
-# robot.turn_right(90)
-
-
-# robot.turn_right(90)
-#     ev3.speaker.beep()
-# 
-
-# while True:
-#     print(robot.angle())
-
-
 
 
 
