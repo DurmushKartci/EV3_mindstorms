@@ -73,24 +73,20 @@ class Robot():
         # STARTING SPEAKER
         self.speaker.set_volume(50, which='_all_')
         # for i in self.notes_frequencies:
-        #     self.speaker.beep(frequency=i, duration=50)
+        #     self.speaker.beep(frequency=i, duration=15)
 
         # self.speaker.set_volume(25, which='_all_')
         # for i in range(len(self.notes_frequencies)):
-        #     self.speaker.beep(frequency=self.notes_frequencies[len(self.notes_frequencies)-i-1], duration=25)
+        #     self.speaker.beep(frequency=self.notes_frequencies[len(self.notes_frequencies)-i-1], duration=15)
+        duration = 400
 
-        self.speaker.beep(frequency=261, duration=75)
-        self.speaker.beep(frequency=493, duration=75)
-        self.speaker.beep(frequency=277, duration=75)
-        self.speaker.beep(frequency=466, duration=75)
-        self.speaker.beep(frequency=293, duration=75)
-        self.speaker.beep(frequency=440, duration=75)
-        self.speaker.beep(frequency=311, duration=75)
-        self.speaker.beep(frequency=415, duration=75)
-        self.speaker.beep(frequency=329, duration=75)
-        self.speaker.beep(frequency=392, duration=75)
-        self.speaker.beep(frequency=349, duration=75)
-        self.speaker.beep(frequency=369, duration=75)
+        
+
+
+
+
+
+
 
         self.speaker.set_volume(100, which='_all_')
 
@@ -106,8 +102,8 @@ class Robot():
     def forward(self, distance ,speed):
         if self.gyro_sensor is not None:
             self.motors_reset()
-            while self.motors_distance() < distance+1:
-                print(robot.angle())
+            while self.motors_distance() < distance:
+                print(self.motors_distance())
                 self.correction = self.angle()*2 
                 self.motors.drive(speed, self.correction)
         else:
@@ -117,16 +113,23 @@ class Robot():
     def backward(self, distance , speed):
         if self.gyro_sensor is not None:
             self.motors_reset()
-            while self.motors_distance() < distance:
+            while abs(self.motors_distance()) < distance:
+                print(self.motors_distance())
                 self.correction = self.angle()*2 
                 self.motors.drive(-speed, self.correction)
         else:
             self.motors.straight(-distance)
 
     # This method rotates the robot to the left by the given angle
-    def turn_left(self, angle):
+    def turn_left(self, angle , speed):
         if self.gyro_sensor is not None:
-            self.motors.turn(angle)
+            self.motors.stop()
+            while abs(self.angle()) < angle:
+                self.left_motor.run(speed)
+                self.right_motor.run(-speed)
+            self.right_motor.brake()
+            self.left_motor.brake()
+            print(self.angle())
             self.reset_angle(0)
             self.correction = self.angle()*2
         else:
@@ -135,9 +138,15 @@ class Robot():
 
 
     # This method rotates the robot to the right by the given angle
-    def turn_right(self, angle):
+    def turn_right(self, angle , speed):
         if self.gyro_sensor is not None:
-            self.motors.turn(-angle)
+            self.motors.stop()
+            while abs(self.angle()) < angle:
+                self.left_motor.run(-speed)
+                self.right_motor.run(speed)
+            self.right_motor.brake()
+            self.left_motor.brake()
+            print(self.angle())
             self.reset_angle(0)
             self.correction = self.angle()*2
 
@@ -224,6 +233,70 @@ class Robot():
         if self.gyro_sensor is not None:
             self.gyro_sensor.reset_angle(angle)    
 
+    # this method plays Dünyanın Sonuna Doğmuşum
+    def dunyanın_sonuna_dogmusum(self):
+
+        # Do
+        # self.speaker.beep(frequency=261, duration=duration)
+        # # Do #        
+        # self.speaker.beep(frequency=277, duration=duration)
+        # # Re        
+        # self.speaker.beep(frequency=293, duration=duration)
+        # # Re #        
+        # self.speaker.beep(frequency=311, duration=duration)
+        # # Mi        
+        # self.speaker.beep(frequency=329, duration=duration)
+        # # Fa        
+        # self.speaker.beep(frequency=349, duration=duration)
+        # # Fa #        
+        # self.speaker.beep(frequency=369, duration=duration)
+        # # Sol        
+        # self.speaker.beep(frequency=392, duration=duration)
+        # # Sol #      
+        # self.speaker.beep(frequency=415, duration=duration)
+        # # La        
+        # self.speaker.beep(frequency=440, duration=duration)
+        # # La #      
+        # self.speaker.beep(frequency=466, duration=duration)
+        # # Si        
+        # self.speaker.beep(frequency=493, duration=duration)
+        duration = 400
+        self.speaker.beep(frequency=293, duration=duration)
+        self.speaker.beep(frequency=440, duration=duration)
+        self.speaker.beep(frequency=392, duration=duration/2)
+        self.speaker.beep(frequency=349, duration=duration)
+        self.speaker.beep(frequency=329, duration=duration/2)
+        self.speaker.beep(frequency=349, duration=duration)
+        self.speaker.beep(frequency=392, duration=duration)
+        self.speaker.beep(frequency=349, duration=duration/2)
+        self.speaker.beep(frequency=329, duration=duration)
+        self.speaker.beep(frequency=293, duration=duration/2)
+        self.speaker.beep(frequency=293, duration=duration)
+        self.speaker.beep(frequency=440, duration=duration)
+        self.speaker.beep(frequency=392, duration=duration/2)
+        self.speaker.beep(frequency=349, duration=duration)
+        self.speaker.beep(frequency=329, duration=duration/2)
+        self.speaker.beep(frequency=349, duration=duration)
+        self.speaker.beep(frequency=392, duration=duration*2)
+        self.speaker.beep(0,duration)
+        self.speaker.beep(frequency=293, duration=duration)
+        self.speaker.beep(frequency=440, duration=duration)
+        self.speaker.beep(frequency=392, duration=duration/2)
+        self.speaker.beep(frequency=349, duration=duration)
+        self.speaker.beep(frequency=329, duration=duration/2)
+        self.speaker.beep(frequency=349, duration=duration)
+        self.speaker.beep(frequency=392, duration=duration)
+        self.speaker.beep(frequency=349, duration=duration/2)
+        self.speaker.beep(frequency=329, duration=duration)
+        self.speaker.beep(frequency=293, duration=duration/2)
+        self.speaker.beep(frequency=293, duration=duration)
+        self.speaker.beep(frequency=329, duration=duration/2)
+        self.speaker.beep(frequency=349, duration=duration/2)
+        self.speaker.beep(frequency=329, duration=duration/2)
+        self.speaker.beep(frequency=293, duration=duration/2)
+        self.speaker.beep(frequency=261, duration=duration)
+        self.speaker.beep(frequency=329, duration=duration)
+        self.speaker.beep(frequency=293, duration=duration)
     # This method turns the robot into an obstacle avoiding robot.s
     def avoid_obstacle(self, distance, speed):
         if self.distance_sensor is not None:
@@ -262,12 +335,16 @@ touch_sensor_port       = None
 color_sensor_port       = None
 gyro_sensor_port        = Port.S4
 
-robot = Robot(ev3, 55.5, 165, right_motor_port, left_motor_port, ultrasonic_sensor_port,  touch_sensor_port,    color_sensor_port,  gyro_sensor_port)
+robot = Robot(ev3, 55.5, 190, right_motor_port, left_motor_port, ultrasonic_sensor_port,  touch_sensor_port,    color_sensor_port,  gyro_sensor_port)
 
 
 # ###############    MAIN    ################    
 
+# for i in range(10):
+#     robot.turn_right(36,500)
 
+# while True:
+#     robot.forward(100,2000)
 
 
 
