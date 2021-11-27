@@ -184,6 +184,13 @@ class Robot():
         else:
             return None
 
+    # This method return reflection of measured color sensor value
+    def reflection(self):
+        if self.color_sensor is not None:
+            return self.color_sensor.reflection()
+        else:
+            return None
+
     # This method return ambient light intensity of measured color sensor value
     def ambient(self):
         if self.color_sensor is not None:
@@ -229,6 +236,16 @@ class Robot():
                 self.speaker.beep(frequency=440,duration=200)
                 while self.distance() < 20:
                     self.turn_right(5)
+        else:
+            return None
+
+    # This method turns the robot into an line follower robot
+    def follow_line(self, distance, speed):
+        if self.color_sensor is not None:
+            self.motors_reset()
+            while self.motors_distance() < distance:
+                light_correction = (30 - self.reflection())*2
+                self.motors.drive(speed, light_correction)
         else:
             return None
 
