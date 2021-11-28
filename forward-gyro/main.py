@@ -380,3 +380,5 @@ robot = Robot(ev3, 55.5, 190, right_motor_port, left_motor_port, ultrasonic_sens
 # ###############    MAIN    ################    
 
 
+while True:
+    robot.forward(100,100)

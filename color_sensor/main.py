@@ -79,16 +79,6 @@ class Robot():
 
         self.speaker.set_volume(100, which='_all_')
 
-        
-
-
-
-
-
-
-
-        self.speaker.set_volume(100, which='_all_')
-
 
 
 
@@ -380,3 +370,19 @@ robot = Robot(ev3, 55.5, 190, right_motor_port, left_motor_port, ultrasonic_sens
 # ###############    MAIN    ################    
 
 
+while True:
+    if robot.color() == Color.BLACK:
+        robot.speaker.beep(robot.notes_frequencies[0],100)
+    elif robot.color() == Color.RED:
+        robot.speaker.beep(robot.notes_frequencies[1],100)
+    elif robot.color() == Color.BLUE:
+        robot.speaker.beep(robot.notes_frequencies[2],100)
+    elif robot.color() == Color.GREEN:
+        robot.speaker.beep(robot.notes_frequencies[3],100)
+    elif robot.color() == Color.YELLOW:
+        robot.speaker.beep(robot.notes_frequencies[4],100)
+    elif robot.color() == Color.WHITE:
+        robot.speaker.beep(robot.notes_frequencies[5],100)
+    elif robot.color() == Color.BROWN:
+        robot.speaker.beep(robot.notes_frequencies[6],100)
+    
