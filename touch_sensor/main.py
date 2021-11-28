@@ -370,9 +370,9 @@ ev3 = EV3Brick()
 right_motor_port        = Port.C
 left_motor_port         = Port.D
 ultrasonic_sensor_port  = None
-touch_sensor_port       = None
+touch_sensor_port       = Port.S2
 color_sensor_port       = None
-gyro_sensor_port        = Port.S4
+gyro_sensor_port        = None
 
 robot = Robot(ev3, 55.5, 190, right_motor_port, left_motor_port, ultrasonic_sensor_port,  touch_sensor_port,    color_sensor_port,  gyro_sensor_port)
 

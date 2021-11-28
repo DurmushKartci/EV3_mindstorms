@@ -369,7 +369,7 @@ ev3 = EV3Brick()
 
 right_motor_port        = Port.C
 left_motor_port         = Port.D
-ultrasonic_sensor_port  = None
+ultrasonic_sensor_port  = Port.S1
 touch_sensor_port       = None
 color_sensor_port       = None
 gyro_sensor_port        = None
@@ -379,4 +379,7 @@ robot = Robot(ev3, 55.5, 190, right_motor_port, left_motor_port, ultrasonic_sens
 
 # ###############    MAIN    ################    
 
-robot.dunyanın_sonuna_dogmusum(400 , 25)
+
+while True:
+    if robot.distance() < 20:
+        robot.speaker.beep(440,100)
