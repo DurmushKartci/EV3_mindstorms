@@ -22,7 +22,7 @@ class Robot():
         ################    Objects    ################    
         self.ev3                = EV3Brick
         self.speaker            = ev3.speaker
-
+        self.light              = ev3.light
         ################    Motors    ################    
         self.right_motor        = Motor(right_motor_port)
         self.left_motor         = Motor(left_motor_port)
@@ -41,51 +41,51 @@ class Robot():
 
         ################    Set Up    ################    
 
+        self.speaker.set_speech_options(language="tr", voice="m1", speed=150, pitch=50)
+        #self.speaker.say("Robot Hazırlanıyo...")
+        self.speaker.set_speech_options(language="en", voice="m1", speed=150, pitch=50)
+
         #Defining sensor if they have a port
-    
-        print(type(ultrasonic_sensor_port))
+            
         if ultrasonic_sensor_port is not None:
             self.distance_sensor    = UltrasonicSensor(ultrasonic_sensor_port)
-            self.speaker.beep()
-
-        print(type(touch_sensor_port))
+            #self.speaker.say("Ultrasonic Sensor")
+        
         if touch_sensor_port is not None:
             self.touch_sensor       = TouchSensor(touch_sensor_port)
-            self.speaker.beep()
-            
-        print(type(color_sensor_port))
+            #self.speaker.say("Touch Sensor")
+                    
         if color_sensor_port is not None:
             self.color_sensor       = ColorSensor(color_sensor_port)
-            self.speaker.beep()
-
-        print(type(gyro_sensor_port))
+            #self.speaker.say("Color Sensor")
+        
         if gyro_sensor_port is not None:
             self.gyro_sensor        = GyroSensor(gyro_sensor_port)
-            self.speaker.beep()
-
-        print(type(ultrasonic_sensor_port))
+            #self.speaker.say("Gyro Sensor")
+        
         # if there is a gyro sensor reset the angle and give variable to correction
         if self.gyro_sensor is not None:
             self.reset_angle(0)
             self.correction = self.angle()*2
 
         self.notes_frequencies = [261,277,311,329,349,369,392,415,440,466,493]
+        self.colors = [Color.BLACK,Color.RED,Color.BLUE,Color.GREEN,Color.YELLOW,Color.WHITE,Color.BROWN]
         # STARTING SPEAKER
         self.speaker.set_volume(50, which='_all_')
 
+        self.speaker.set_speech_options(language="tr", voice="m1", speed=150, pitch=50)
+        #self.speaker.say("Robot Başlatılıyo...")
 
         for i in self.notes_frequencies:
             self.speaker.beep(frequency=i, duration=15)
 
-        self.speaker.set_volume(100, which='_all_')
-
-        
-
-
-
-
-
-
+        self.light.on(Color.RED)
+        wait(100)
+        self.light.on(Color.YELLOW)
+        wait(100)
+        self.light.on(Color.RED)
+        wait(100)
+        self.light.off()
 
         self.speaker.set_volume(100, which='_all_')
 
